@@ -9,3 +9,11 @@
 a {
     text-decoration: none;
 }
+
+.banner {
+    width: 100vw;
+    height: 100vh;
+    background: url(../images/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: calc(100% + 50px);
+}
