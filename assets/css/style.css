@@ -10,10 +10,420 @@ a {
     text-decoration: none;
 }
 
-.banner {
-    width: 100vw;
-    height: 100vh;
-    background: url(../images/banner.jpg);
-    background-repeat: no-repeat;
-    background-size: calc(100% + 50px);
+body {
+    overflow: hidden;
+    background: url("../images/banner.jpg") no-repeat;
+    background-position: top center;
+    background-size: cover;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 30% 30%, #0f2027, #000000);
+    z-index: -1;
+    opacity: 0.95;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.ui {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.switch {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.switch.active {
+    background: white;
+    color: black;
+}
+
+.contact-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 20;
+
+    padding: 14px 22px;
+    border-radius: 50px;
+
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 30px rgba(0, 114, 255, 0.4);
+    transition: 0.3s;
+}
+
+/* hover = stronger glow */
+.contact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0, 114, 255, 0.7);
+}
+
+/* subtle pulse */
+.contact-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background: inherit;
+    z-index: -1;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    70% {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.contact-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.6s ease;
+}
+
+.contact-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.contact-bg {
+    position: absolute;
+    inset: 0;
+
+    background: radial-gradient(circle at 30% 30%, #0f2027, #203a43, #2c5364);
+    overflow: hidden;
+}
+
+/* moving gradient waves */
+.contact-bg::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.2), transparent 60%);
+    animation: moveBg 10s linear infinite;
+}
+
+@keyframes moveBg {
+    0% {
+        transform: translate(-25%, -25%);
+    }
+    50% {
+        transform: translate(-10%, -40%);
+    }
+    100% {
+        transform: translate(-25%, -25%);
+    }
+}
+
+.contact-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%) scale(0.8);
+
+    width: 320px;
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+
+    color: white;
+    text-align: center;
+
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.contact-overlay.active .contact-form {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+
+    border: none;
+    outline: none;
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+::placeholder {
+    color: #fff;
+    opacity: 0.7;
+}
+
+.contact-form button {
+    margin-top: 20px;
+    padding: 12px;
+    width: 100%;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+
+    cursor: pointer;
+}
+
+.close-btn {
+    position: absolute;
+    max-width: 3rem;
+    top: -30px;
+    right: -10px;
+
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+
+    transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.close-btn:hover {
+    transform: rotate(-5deg) scale(1.1);
+}
+
+/* cards */
+.cards {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    gap: 30px;
+    z-index: 15;
+}
+
+.card {
+    width: 250px;
+    height: 320px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.card.cyan {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+.card.pink {
+    box-shadow: 0 0 20px rgba(255, 0, 150, 0.4);
+}
+.card.purple {
+    box-shadow: 0 0 20px rgba(150, 0, 255, 0.4);
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: repeating-linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.05) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(20px);
+    }
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+}
+
+/* stronger glow on hover */
+.card.cyan:hover {
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.9);
+}
+.card.pink:hover {
+    box-shadow: 0 0 40px rgba(255, 0, 150, 0.9);
+}
+.card.purple:hover {
+    box-shadow: 0 0 40px rgba(150, 0, 255, 0.9);
+}
+
+.icon {
+    position: static;
+    font-size: 60px;
+
+    opacity: 0.08;
+    transform: scale(0.9) translateY(-20px);
+
+    pointer-events: none;
+
+    transition: all 0.4s ease;
+}
+
+.card.cyan .icon {
+    color: rgba(0, 255, 255, 0.6);
+}
+.card.pink .icon {
+    color: rgba(255, 0, 150, 0.6);
+}
+.card.purple .icon {
+    color: rgba(150, 0, 255, 0.6);
+}
+
+.card:hover .icon {
+    opacity: 0.65;
+    transform: scale(1.2) translateY(-20px);
+
+    filter: blur(1px);
+}
+
+.card.cyan:hover .icon {
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 30px rgba(0, 255, 255, 0.6), 0 0 60px rgba(0, 255, 255, 0.4);
+}
+
+.card.pink:hover .icon {
+    text-shadow: 0 0 10px rgba(255, 0, 150, 0.8), 0 0 30px rgba(255, 0, 150, 0.6), 0 0 60px rgba(255, 0, 150, 0.4);
+}
+
+.card.purple:hover .icon {
+    text-shadow: 0 0 10px rgba(150, 0, 255, 0.8), 0 0 30px rgba(150, 0, 255, 0.6), 0 0 60px rgba(150, 0, 255, 0.4);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.2), transparent);
+
+    opacity: 0;
+    transform: scale(0) translateY(-40px);
+
+    transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    transition-delay: -0.3s;
+}
+
+.card:hover::after {
+    opacity: 0.5;
+    transform: scale(1) translateY(-40px);
+}
+
+/*trends*/
+.orbit-menu {
+    position: fixed;
+    bottom: -25%;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+
+    transform: translate(-50%, -140px);
+    z-index: 12;
+
+    display: none; /* only in trendy */
+    align-items: center;
+}
+
+.orbit-menu.active {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.orbit-item {
+    font-size: 28px;
+    color: white;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.orbit-item:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
 }

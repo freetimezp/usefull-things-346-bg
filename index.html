@@ -9,11 +9,57 @@
     </head>
 
     <body>
-        <div class="banner"></div>
+        <canvas id="webgl"></canvas>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script src="./assets/js/jquery.backgroundMove.js"></script>
+        <div class="ui">
+            <button class="switch active" data-mode="parallax">Parallax</button>
+            <button class="switch" data-mode="hologram">Hologram</button>
+            <button class="switch" data-mode="trendy">Trendy</button>
+        </div>
 
-        <script src="./assets/js/main.js"></script>
+        <div class="contact-btn" id="contactBtn">Contact Us</div>
+
+        <div class="contact-overlay" id="contactOverlay">
+            <div class="contact-bg"></div>
+
+            <div class="contact-form">
+                <button class="close-btn" id="closeForm">✕</button>
+
+                <h2>Let’s talk</h2>
+
+                <form>
+                    <input type="text" placeholder="Your name" required />
+                    <input type="email" placeholder="Email" required />
+                    <textarea placeholder="Message"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card cyan">
+                <span class="icon">◈</span>
+                Product 1
+            </div>
+
+            <div class="card pink">
+                <span class="icon">✦</span>
+                Product 2
+            </div>
+
+            <div class="card purple">
+                <span class="icon">⬡</span>
+                Product 3
+            </div>
+        </div>
+
+        <div class="orbit-menu" id="orbitMenu">
+            <div class="orbit-item" data-mode="parallax">❔</div>
+            <div class="orbit-item" data-mode="hologram">♻</div>
+            <div class="orbit-item" data-mode="trendy">%</div>
+            <div class="orbit-item" id="orbitContact">✉</div>
+        </div>
+
+        <script type="module" src="./assets/js/main.js"></script>
     </body>
 </html>
