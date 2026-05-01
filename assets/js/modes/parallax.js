@@ -10,7 +10,7 @@ export function initParallax(scene, camera) {
     // 🔥 BACKGROUND IMAGE
     const textureLoader = new THREE.TextureLoader();
 
-    let PATH_URL_IMAGE_BG = base + "../../../assets/images/banner.jpg";
+    let PATH_URL_IMAGE_BG = base + "assets/images/banner.jpg";
     const bgTexture = textureLoader.load(PATH_URL_IMAGE_BG);
 
     const bgGeo = new THREE.PlaneGeometry(20, 10);
