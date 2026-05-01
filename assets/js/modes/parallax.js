@@ -1,12 +1,17 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160/build/three.module.js";
 
+const base =
+    (import.meta.env && import.meta.env.BASE_URL) !== undefined ? import.meta.env.BASE_URL : "/usefull-things-346-bg/";
+
 export function initParallax(scene, camera) {
     const group = new THREE.Group();
     scene.add(group);
 
     // 🔥 BACKGROUND IMAGE
     const textureLoader = new THREE.TextureLoader();
-    const bgTexture = textureLoader.load("../../../assets/images/banner.jpg");
+
+    let PATH_URL_IMAGE_BG = base + "../../../assets/images/banner.jpg";
+    const bgTexture = textureLoader.load(PATH_URL_IMAGE_BG);
 
     const bgGeo = new THREE.PlaneGeometry(20, 10);
     const bgMat = new THREE.MeshBasicMaterial({
